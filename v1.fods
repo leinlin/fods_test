@@ -13,8 +13,8 @@
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="工作表1">
-       <config:config-item config:name="CursorPositionX" config:type="int">11</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">11</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">7</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">13</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">2</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -237,7 +237,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2026-03-25">0000/00/00</text:date>, <text:time style:data-style-name="N2" text:time-value="21:24:45.509000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2026-03-25">0000/00/00</text:date>, <text:time style:data-style-name="N2" text:time-value="21:26:06.645000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>

@@ -1,0 +1,61 @@
+#!/usr/bin/perl
+#
+# Git pre-commit hook: Remove meta information from .fods files
+# This prevents merge conflicts caused by metadata differences (edit time, etc.)
+#
+# Requires: Perl (included with Git)
+
+use strict;
+use warnings;
+use File::Temp qw(tempfile);
+
+# Get list of staged .fods files
+my @fods_files = ();
+open(my $fh, '-|', 'git', 'diff', '--cached', '--name-only', '--diff-filter=ACM', '*.fods')
+    or die "Cannot run git diff: $!";
+while (my $line = <$fh>) {
+    chomp $line;
+    push @fods_files, $line if $line;
+}
+close($fh);
+
+# Exit if no .fods files
+exit 0 unless @fods_files;
+
+print "Processing " . scalar(@fods_files) . " .fods file(s)...\n";
+
+my $modified = 0;
+
+foreach my $file (@fods_files) {
+    # Read file
+    open(my $in, '<', $file) or die "Cannot open $file: $!";
+    my $content = do { local $/; <$in> };
+    close($in);
+    
+    # Remove meta info: replace <office:meta>...</office:meta> with <office:meta/>
+    my $new_content = $content;
+    $new_content =~ s|<office:meta>.*?</office:meta>|<office:meta/>|sg;
+    
+    # If content changed, write it back
+    if ($new_content ne $content) {
+        # Write to temp file first
+        my ($temp_fh, $temp_file) = tempfile(DIR => '.', UNLINK => 0);
+        print $temp_fh $new_content;
+        close($temp_fh);
+        
+        # Move temp file to original
+        rename($temp_file, $file) or die "Cannot rename $temp_file to $file: $!";
+        
+        # Re-add to staging area
+        system('git', 'add', $file) == 0 or die "Cannot git add $file: $!";
+        
+        print "Removed meta info from: $file\n";
+        $modified = 1;
+    }
+}
+
+if ($modified) {
+    print "Meta information removed. Files re-staged.\n";
+}
+
+exit 0;
