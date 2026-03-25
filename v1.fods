@@ -154,14 +154,6 @@
    <style:table-cell-properties style:text-align-source="fix" style:repeat-content="false" fo:border="0.06pt solid #000000"/>
    <style:paragraph-properties fo:text-align="center" fo:margin-left="0cm"/>
   </style:style>
-  <style:style style:name="ce5" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="#ffff00" style:text-align-source="fix" style:repeat-content="false" fo:border="0.06pt solid #000000"/>
-   <style:paragraph-properties fo:text-align="center" fo:margin-left="0cm"/>
-  </style:style>
-  <style:style style:name="ce6" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties style:text-align-source="fix" style:repeat-content="false" fo:border="0.06pt solid #000000"/>
-   <style:paragraph-properties fo:text-align="center" fo:margin-left="0cm"/>
-  </style:style>
   <style:page-layout style:name="pm1">
    <style:page-layout-properties style:writing-mode="lr-tb"/>
    <style:header-style>
@@ -353,6 +345,62 @@
      </table:table-cell>
      <table:table-cell table:formula="of:=[.A10]+[.B10]" office:value-type="float" office:value="126" calcext:value-type="float">
       <text:p>126</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="float" office:value="20" calcext:value-type="float">
+      <text:p>20</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="108" calcext:value-type="float">
+      <text:p>108</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="12" calcext:value-type="float">
+      <text:p>12</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=[.A11]+[.B11]" office:value-type="float" office:value="128" calcext:value-type="float">
+      <text:p>128</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="float" office:value="21" calcext:value-type="float">
+      <text:p>21</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="109" calcext:value-type="float">
+      <text:p>109</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="13" calcext:value-type="float">
+      <text:p>13</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=[.A12]+[.B12]" office:value-type="float" office:value="130" calcext:value-type="float">
+      <text:p>130</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="float" office:value="22" calcext:value-type="float">
+      <text:p>22</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="110" calcext:value-type="float">
+      <text:p>110</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="14" calcext:value-type="float">
+      <text:p>14</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=[.A13]+[.B13]" office:value-type="float" office:value="132" calcext:value-type="float">
+      <text:p>132</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="float" office:value="23" calcext:value-type="float">
+      <text:p>23</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="111" calcext:value-type="float">
+      <text:p>111</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="15" calcext:value-type="float">
+      <text:p>15</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=[.A14]+[.B14]" office:value-type="float" office:value="134" calcext:value-type="float">
+      <text:p>134</text:p>
      </table:table-cell>
     </table:table-row>
    </table:table>
