@@ -672,6 +672,251 @@ grep '\[\.A\[' v1.fods  # 应该返回0（如果A列已被删除）
 
 ---
 
+## 空值高亮处理
+
+### 概述
+在合并表格时，可能会出现空单元格（如新增行缺少某些列的值）。为方便识别，可以为空值添加高亮提示样式。
+
+### 应用场景
+
+**典型场景**：
+- 合并时新增行，但缺少某些列的数据
+- 部分单元格需要保留为空值
+- 需要快速识别哪些单元格需要后续补充数据
+
+### 实现方法
+
+#### 1. 创建高亮样式
+
+在 `<office:automatic-styles>` 中添加空值高亮样式：
+
+```xml
+<!-- 空值高亮样式 -->
+<style:style style:name="ce4" style:family="table-cell" style:parent-style-name="Default">
+  <style:table-cell-properties 
+    fo:background-color="#ffcccc"          <!-- 浅红色背景 -->
+    fo:border="0.06pt solid #000000"       <!-- 黑色边框 -->
+    style:text-align-source="fix" 
+    style:repeat-content="false"/>
+  <style:paragraph-properties 
+    fo:text-align="center" 
+    fo:margin-left="0cm"/>
+  <style:text-properties 
+    fo:color="#cc0000"                     <!-- 深红色文字 -->
+    fo:font-weight="bold"/>                <!-- 加粗 -->
+</style:style>
+```
+
+**样式说明**：
+- `ce4`：样式名称（可自定义）
+- `background-color="#ffcccc"`：浅红色背景
+- `color="#cc0000"`：深红色文字
+- `font-weight="bold"`：加粗文字
+- `border`：黑色边框
+
+#### 2. 应用到空单元格
+
+将空单元格的标签从：
+```xml
+<table:table-cell/>
+```
+
+改为：
+```xml
+<table:table-cell table:style-name="ce4">
+  <text:p>空</text:p>
+</table:table-cell>
+```
+
+**示例应用**：
+```xml
+<!-- 原始空单元格 -->
+<table:table-row table:style-name="ro1">
+  <table:table-cell>14</table:table-cell>
+  <table:table-cell>102</table:table-cell>
+  <table:table-cell/>  <!-- 空值 -->
+  <table:table-cell>116</table:table-cell>
+</table:table-row>
+
+<!-- 应用高亮后 -->
+<table:table-row table:style-name="ro1">
+  <table:table-cell>14</table:table-cell>
+  <table:table-cell>102</table:table-cell>
+  <table:table-cell table:style-name="ce4">
+    <text:p>空</text:p>
+  </table:table-cell>
+  <table:table-cell>116</table:table-cell>
+</table:table-row>
+```
+
+### 样式变体
+
+根据不同需求，可以使用不同的高亮样式：
+
+#### 警告样式（黄色）
+```xml
+<style:style style:name="ce_warning" style:family="table-cell">
+  <style:table-cell-properties fo:background-color="#ffffcc" fo:border="0.06pt solid #ffcc00"/>
+  <style:text-properties fo:color="#996600" fo:font-weight="bold"/>
+</style:style>
+```
+
+#### 错误样式（红色）
+```xml
+<style:style style:name="ce_error" style:family="table-cell">
+  <style:table-cell-properties fo:background-color="#ffcccc" fo:border="0.06pt solid #ff0000"/>
+  <style:text-properties fo:color="#cc0000" fo:font-weight="bold"/>
+</style:style>
+```
+
+#### 提示样式（蓝色）
+```xml
+<style:style style:name="ce_info" style:family="table-cell">
+  <style:table-cell-properties fo:background-color="#ccffff" fo:border="0.06pt solid #00cccc"/>
+  <style:text-properties fo:color="#0066cc" fo:font-weight="bold"/>
+</style:style>
+```
+
+### 合并流程中的空值高亮
+
+#### 步骤 1：识别空单元格
+
+在合并后的文件中，查找需要高亮的空单元格：
+
+```bash
+# 查找空单元格标签
+grep -n '<table:table-cell/>' v1.fods
+
+# 查找只有空白内容的单元格
+grep -n '<table:table-cell>\s*</table:table-cell>' v1.fods
+```
+
+#### 步骤 2：添加样式定义
+
+确保在 `<office:automatic-styles>` 中定义了高亮样式。
+
+#### 步骤 3：应用样式
+
+将需要高亮的空单元格替换为带样式的单元格。
+
+#### 步骤 4：验证结果
+
+```bash
+# 检查样式应用是否正确
+grep -n 'table:style-name="ce4"' v1.fods
+
+# 用表格软件打开验证视觉效果
+```
+
+### 批量处理示例
+
+如果需要批量处理多个空单元格，可以使用脚本：
+
+```bash
+# 批量替换空单元格为高亮单元格
+sed -i 's|<table:table-cell/>\s*|<table:table-cell table:style-name="ce4">\n      <text:p>空</text:p>\n     </table:table-cell>|g' v1.fods
+```
+
+**注意**：批量替换前建议先备份文件，因为并非所有空单元格都需要高亮。
+
+### 实战案例
+
+#### 案例：合并新增行后的空值高亮
+
+**场景**：
+- LOCAL 新增第 5 行：`14, 102`
+- REMOTE 有 4 列结构（atk, hp, def, power）
+- 第 5 行的 def 列为空
+
+**处理步骤**：
+
+1. **合并结构**：
+```xml
+<table:table-row table:style-name="ro1">
+  <table:table-cell>14</table:table-cell>
+  <table:table-cell>102</table:table-cell>
+  <table:table-cell/>  <!-- 空 -->
+  <table:table-cell table:formula="of:=[.A5]+[.B5]">116</table:table-cell>
+</table:table-row>
+```
+
+2. **添加高亮样式定义**（在 automatic-styles 中）
+
+3. **应用到空单元格**：
+```xml
+<table:table-row table:style-name="ro1">
+  <table:table-cell>14</table:table-cell>
+  <table:table-cell>102</table:table-cell>
+  <table:table-cell table:style-name="ce4">
+    <text:p>空</text:p>
+  </table:table-cell>
+  <table:table-cell table:formula="of:=[.A5]+[.B5]">116</table:table-cell>
+</table:table-row>
+```
+
+**最终效果**：
+- 第 5 行的 def 列显示为浅红色背景
+- 深红色加粗文字"空"
+- 黑色边框，醒目提示需要补充数据
+
+### 最佳实践
+
+#### 1. 选择合适的样式
+
+| 场景 | 推荐样式 | 颜色方案 |
+|------|---------|---------|
+| 需要补充数据 | 警告样式 | 黄色背景 |
+| 错误或无效 | 错误样式 | 红色背景 |
+| 信息提示 | 提示样式 | 蓝色背景 |
+
+#### 2. 保持一致性
+
+- 同一类型的空值使用相同样式
+- 保持样式定义的统一命名规范
+- 文档中说明不同样式的含义
+
+#### 3. 文档记录
+
+在合并说明中记录：
+```
+□ 空值位置：第 X 行第 Y 列
+□ 空值原因：新增行缺少该列数据
+□ 后续行动：需要补充 def 值
+```
+
+#### 4. 后续处理
+
+合并完成后，对于高亮的空值：
+- 及时补充数据
+- 补充后移除高亮样式
+- 更新文档记录
+
+### 注意事项
+
+1. **不影响公式计算**：高亮样式只是视觉提示，不影响单元格的公式引用
+2. **兼容性**：样式定义遵循 ODF 标准，在 LibreOffice、OpenOffice 等软件中均能正常显示
+3. **性能影响**：大量单元格应用样式可能轻微影响文件大小和加载速度
+4. **导出注意**：导出为其他格式（如 CSV）时，高亮信息会丢失
+
+### 总结
+
+空值高亮是提高表格可读性和可维护性的有效方法：
+
+✅ **优点**：
+- 快速识别需要补充的数据
+- 醒目的视觉提示
+- 不影响数据完整性
+
+⚠️ **注意事项**：
+- 合理选择样式颜色
+- 保持样式一致性
+- 及时补充数据并移除高亮
+- 记录空值原因和处理计划
+
+通过空值高亮，可以让合并后的表格更加清晰，便于后续的数据补充和维护工作。
+
+---
+
 ## 注意事项
 
 1. **备份重要数据**：在解决复杂冲突前，考虑备份当前状态
