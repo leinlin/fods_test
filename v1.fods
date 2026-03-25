@@ -463,6 +463,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="float" office:value="15" calcext:value-type="float">
+      <text:p>15</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="25" calcext:value-type="float">
+      <text:p>25</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="113" calcext:value-type="float">
+      <text:p>113</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="float" office:value="17" calcext:value-type="float">
+      <text:p>17</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=[.B16]+[.C16]" office:value-type="float" office:value="138" calcext:value-type="float">
+      <text:p>138</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="float" office:value="20" calcext:value-type="float">
       <text:p>20</text:p>
      </table:table-cell>
@@ -475,7 +492,7 @@
      <table:table-cell office:value-type="float" office:value="17" calcext:value-type="float">
       <text:p>17</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.B16]+[.C16]" office:value-type="float" office:value="138" calcext:value-type="float">
+     <table:table-cell table:formula="of:=[.B17]+[.C17]" office:value-type="float" office:value="138" calcext:value-type="float">
       <text:p>138</text:p>
      </table:table-cell>
     </table:table-row>
