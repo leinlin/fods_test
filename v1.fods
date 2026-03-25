@@ -7,14 +7,14 @@
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">9031</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">2257</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">2709</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="工作表1">
-       <config:config-item config:name="CursorPositionX" config:type="int">5</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">8</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">11</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">11</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">2</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -197,11 +197,6 @@
    <style:table-cell-properties style:text-align-source="fix" style:repeat-content="false"/>
    <style:paragraph-properties fo:text-align="center" fo:margin-left="0cm"/>
   </style:style>
-  <style:style style:name="ce4" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N2">
-   <style:table-cell-properties fo:background-color="#ffcccc" style:text-align-source="fix" style:repeat-content="false" fo:border="0.06pt solid #000000" style:border-line-width="0.06pt 0.06pt 0.06pt 0.06pt"/>
-   <style:paragraph-properties fo:text-align="center" fo:margin-left="0cm"/>
-   <style:text-properties fo:color="#cc0000" fo:font-weight="bold"/>
-  </style:style>
   <style:page-layout style:name="pm1">
    <style:page-layout-properties style:writing-mode="lr-tb"/>
    <style:header-style>
@@ -242,7 +237,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2026-03-25">0000/00/00</text:date>, <text:time style:data-style-name="N2" text:time-value="19:31:26.535000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2026-03-25">0000/00/00</text:date>, <text:time style:data-style-name="N2" text:time-value="21:24:45.509000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -321,8 +316,8 @@
      <table:table-cell office:value-type="float" office:value="102" calcext:value-type="float">
       <text:p>102</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce4">
-      <text:p>空</text:p>
+     <table:table-cell office:value-type="float" office:value="6" calcext:value-type="float">
+      <text:p>6</text:p>
      </table:table-cell>
      <table:table-cell table:formula="of:=[.A5]+[.B5]" office:value-type="float" office:value="116" calcext:value-type="float">
       <text:p>116</text:p>
