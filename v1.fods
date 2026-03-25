@@ -197,6 +197,11 @@
    <style:table-cell-properties style:text-align-source="fix" style:repeat-content="false"/>
    <style:paragraph-properties fo:text-align="center" fo:margin-left="0cm"/>
   </style:style>
+  <style:style style:name="ce4" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N2">
+   <style:table-cell-properties fo:background-color="#ffcccc" style:text-align-source="fix" style:repeat-content="false" fo:border="0.06pt solid #000000" style:border-line-width="0.06pt 0.06pt 0.06pt 0.06pt"/>
+   <style:paragraph-properties fo:text-align="center" fo:margin-left="0cm"/>
+   <style:text-properties fo:color="#cc0000" fo:font-weight="bold"/>
+  </style:style>
   <style:page-layout style:name="pm1">
    <style:page-layout-properties style:writing-mode="lr-tb"/>
    <style:header-style>
@@ -316,7 +321,9 @@
      <table:table-cell office:value-type="float" office:value="102" calcext:value-type="float">
       <text:p>102</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell table:style-name="ce4">
+      <text:p>空</text:p>
+     </table:table-cell>
      <table:table-cell table:formula="of:=[.A5]+[.B5]" office:value-type="float" office:value="116" calcext:value-type="float">
       <text:p>116</text:p>
      </table:table-cell>
